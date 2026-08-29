@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>全国踏破マップ</title>
+<link rel="stylesheet" href="css/style.css">
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1F7A5C">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="踏破マップ">
+</head>
+<body>
+
+<header class="app-header">
+  <div class="app-header-inner">
+    <h1 class="app-title">全国踏破マップ</h1>
+    <button id="theme-open-btn" class="theme-switch-btn">
+      <span id="current-theme-name">テーマ未設定</span>
+      <span class="theme-switch-btn-icon">▾</span>
+    </button>
+  </div>
+</header>
+
+<main class="app-main">
+  <div class="stats-bar">
+    <span id="stats-text">0 / 47 都道府県 達成</span>
+    <div class="stats-bar-track"><div id="stats-bar-fill" class="stats-bar-fill"></div></div>
+  </div>
+
+  <div class="map-wrap">
+    <svg id="japan-map" class="japan-map" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
+
+  <p class="map-hint">都道府県をタップ／クリックしてミッションを確認・写真を登録できます。</p>
+</main>
+
+<!-- 都道府県詳細ドロワー -->
+<div id="pref-overlay" class="overlay hidden"></div>
+<aside id="pref-panel" class="pref-panel hidden">
+  <button id="pref-panel-close" class="panel-close-btn" aria-label="閉じる">×</button>
+  <div id="pref-panel-body" class="pref-panel-body"></div>
+</aside>
+
+<!-- テーマ管理モーダル -->
+<div id="theme-modal-overlay" class="overlay hidden"></div>
+<div id="theme-modal" class="modal hidden">
+  <button id="theme-modal-close" class="panel-close-btn" aria-label="閉じる">×</button>
+  <h2 class="modal-title">テーマを管理</h2>
+
+  <div id="theme-list" class="theme-list"></div>
+
+  <hr class="modal-divider">
+
+  <h3 class="modal-subtitle">新しいテーマを作成</h3>
+  <form id="theme-create-form" class="theme-create-form">
+    <label class="form-label">
+      テーマ名
+      <input type="text" id="theme-name-input" placeholder="例：ご当地グルメ制覇" required>
+    </label>
+    <label class="form-label">
+      ミッション内容
+      <input type="text" id="theme-mission-input" placeholder="例：{pref}でご当地グルメを食べたことがある" required>
+      <span class="form-hint">「{pref}」と書くと都道府県名に自動置換されます（省略可）</span>
+    </label>
+    <button type="submit" class="btn btn-primary">このテーマを作成する</button>
+  </form>
+</div>
+
+<!-- アップロード確認モーダル -->
+<div id="confirm-modal-overlay" class="overlay hidden"></div>
+<div id="confirm-modal" class="modal hidden">
+  <button id="confirm-modal-close" class="panel-close-btn" aria-label="閉じる">×</button>
+  <h2 class="modal-title">達成を登録</h2>
+  <div id="confirm-modal-body" class="confirm-modal-body"></div>
+</div>
+
+<input type="file" id="file-input" accept="image/*" capture="environment" class="visually-hidden">
+
+<script src="data/prefectures-geo.js"></script>
+<script src="js/geo.js"></script>
+<script src="js/exif.js"></script>
+<script src="js/db.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

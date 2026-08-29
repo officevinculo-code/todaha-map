@@ -1,0 +1,15 @@
+{
+  "name": "全国踏破マップ",
+  "short_name": "踏破マップ",
+  "description": "都道府県ごとのミッションを達成して日本地図を塗りつぶす、写真の位置情報でミッション達成を記録するアプリ",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F6F3ED",
+  "theme_color": "#1F7A5C",
+  "icons": [
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
