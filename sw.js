@@ -1,6 +1,6 @@
 // アプリ本体（HTML/CSS/JS/地図データ/アイコン）をオフラインでも起動できるようキャッシュする。
 // ファイルを更新したら CACHE_NAME のバージョン番号を上げること（上げないと古いキャッシュが使われ続ける）。
-const CACHE_NAME = 'todaha-map-v1';
+const CACHE_NAME = 'todaha-map-v2';
 
 const APP_SHELL = [
   './',
