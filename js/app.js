@@ -442,6 +442,17 @@ function bindGlobalEvents() {
 // http(s)経由（自ホスト配信）で開いた場合のみオフラインキャッシュが有効になる。
 function registerServiceWorker() {
   if (!('serviceWorker' in navigator)) return;
+
+  // sw.js側でskipWaiting+clients.claimしても、開きっぱなしの画面は自動では
+  // 新しいHTML/JSを再取得しない。制御が新しいService Workerに切り替わった瞬間に
+  // 1回だけリロードし、更新のたびにユーザーがアプリを2回開き直す必要をなくす。
+  let hasReloaded = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (hasReloaded) return;
+    hasReloaded = true;
+    window.location.reload();
+  });
+
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js').catch((e) => {
       console.warn('Service Workerの登録に失敗しました（file://で開いている場合は仕様です）', e);
